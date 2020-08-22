@@ -45,6 +45,7 @@ function preload() {
     pic = loadImage('https://thumbs.dreamstime.com/b/simple-background-10181840.jpg');
     plant = loadImage('https://i.ibb.co/48WLjkz/plant.jpg');
     lamp = loadImage('https://i.ibb.co/P566x1K/lamp.jpg');
+    backgroundImg = loadImage('https://i.ibb.co/C1883Dc/Colorful-Wallpapers.jpg');
 }    
 function drawLamp(xPos) {
     push();
@@ -190,8 +191,8 @@ function setup() {
     createCanvas(700, 700);
     state = 'start';
     HCFSimButton = new CircleButton(createVector(width / 2, height / 2 - 80), 50, 'HCF & LCM', 13);
-    photSimButton = new CircleButton(createVector(width / 2 - 70, height / 2 + 70), 50, 'Photosynthesis', 13);
-    fricSimButton = new CircleButton(createVector(width / 2 + 70, height / 2 + 70), 50, 'Friction', 13);
+    photSimButton = new CircleButton(createVector(width / 2 - 80, height / 2 + 70), 50, 'Photosynthesis', 13);
+    fricSimButton = new CircleButton(createVector(width / 2 + 80, height / 2 + 70), 50, 'Friction', 13);
 
     //sims setup
     HCFstate = 'Choose Number';
@@ -253,10 +254,10 @@ function setup() {
 }
 function draw() {
     if (state === 'start') {
-        background(200);
+        image(backgroundImg, 0, 0, width , height);
         textAlign(CENTER, CENTER);
-        fill(255, 0, 255);
-        textSize(30);
+        fill(0);
+        textSize(50);
         text('Land of Simulations', width / 2, 50);
         fricSimButton.show();
         if (fricSimButton.amPressed()) {
@@ -270,6 +271,7 @@ function draw() {
         if (photSimButton.amPressed()) {
             state = 'Photosynthesis';
         }
+        
     } else if (fricstate === 'Friction') {
         image(pic, 0, 0, 600, 600);   
         drawGround();
