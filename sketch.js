@@ -54,6 +54,12 @@ function drawLamp(xPos) {
     image(lamp, 0, 0, width, height);
     pop();
 }
+function reduceCanvas() {
+    fill(255);
+    noStroke();
+    rect(0, 600, width, 100);
+    rect(600, 0, 100, height);
+}
 function drawLight(rcolour, bcolour, gcolour, intensity, lampPos, lampSize) {
     stroke(rcolour, bcolour, gcolour);
     strokeWeight(1);
@@ -180,11 +186,12 @@ function drawGround() {
     rect(0, 450, width, 150);
 }
 function setup() {
-    createCanvas(600, 600);
+    frameRate(30);
+    createCanvas(700, 700);
     state = 'start';
     HCFSimButton = new Button(createVector(width / 2, height / 2 - 50), 60, 30, 'HCF & LCM', 10);
     photSimButton = new Button(createVector(width / 2, height / 2), 60, 30, 'Photosynthesis', 10);
-    fricSimButton = new Button(createVector(width / 2, height / 2), 60, 30, 'Friction', 10);
+    fricSimButton = new Button(createVector(width / 2, height / 2 + 50), 60, 30, 'Friction', 10);
 
     //sims setup
     HCFstate = 'Choose Number';
@@ -245,23 +252,24 @@ function setup() {
     fricstate = 'setBox';
 }
 function draw() {
-    if (fricstate === 'start') {
+    if (state === 'start') {
         background(0);
         fricSimButton.show();
         if (fricSimButton.amPressed()) {
-            fricstate = 'Friction';
+            state = 'Friction';
         }
         HCFSimButton.show();
         if (HCFSimButton.amPressed()) {
-            fricstate = 'HCF & LCM';
+            state = 'HCF & LCM';
         }
         photSimButton.show();
         if (photSimButton.amPressed()) {
-            fricstate = 'Photosynthesis';
+            state = 'Photosynthesis';
         }
     } else if (fricstate === 'Friction') {
         image(pic, 0, 0, 600, 600);   
         drawGround();
+        
     
         HCFRestartButton.show();
         HCFRunButton.show();
@@ -320,7 +328,9 @@ function draw() {
         } else if (fricstate === 'go') {
             box.run();
         }
+        reduceCanvas();
     } else if (state === 'Photosynthesis'){
+        
         background(50, 150, 100);
   drawLamp(lampPos);
   drawSetup();
@@ -471,39 +481,52 @@ function draw() {
     drawOxygen(drawBubble(bubbles, calculateRateOfPhot(intensity, concentration, wavelength, (475 - lampPos) / 10), timer, 480, totalOxygen));
   }
   drawLight(rOfLight, gOfLight, bOfLight, intensity, createVector(lampPos, 350), createVector(100, 150));
+  reduceCanvas();
     } else if (state === 'HCF & LCM') {
         background(200);
-        resizeCanvas(700, 700);
-    if (HCFstate === 'Choose Number') {
-        numberArray.run();
-        if (numberArray.go) {
-            HCFstate = 'Choose Mode';
-        }
-    } else if (HCFstate === 'Choose Mode') {
-        textSize(30);
-        textAlign(CENTER);
-        text('HCF or LCM?', width / 2, height / 5);
-        HCFButton.show();
-        LCMButton.show();
-        solver = new Solver(numberArray.numbersToSolve);
-        if (HCFButton.amPressed()) {
-            HCFstate = 'solve';
-            solver.mode = 'HCF';
-            solver.findFactors();
-        } else if (LCMButton.amPressed()) {
-            HCFstate = 'solve';
-            solver.mode = 'LCM';
-            solver.findFactorsLCM();
-        }
+        if (HCFstate === 'Choose Number') {
+            numberArray.run();
+            if (numberArray.go) {
+                HCFstate = 'Choose Mode';
+            }
+        } else if (HCFstate === 'Choose Mode') {
+            textSize(30);
+            textAlign(CENTER);
+            text('HCF or LCM?', width / 2, height / 5);
+            HCFButton.show();
+            LCMButton.show();
+            solver = new Solver(numberArray.numbersToSolve);
+            if (HCFButton.amPressed()) {
+                HCFstate = 'solve';
+                solver.mode = 'HCF';
+                solver.findFactors();
+            } else if (LCMButton.amPressed()) {
+                HCFstate = 'solve';
+                solver.mode = 'LCM';
+                solver.findFactorsLCM();
+            }
 
-    } else {
-        solver.run();
-        if (solver.finished) {
-            HCFstate = 'Choose Number';
-            numberArray.go = false;
+        } else {
+            solver.run();
+            if (solver.finished) {
+                HCFstate = 'Choose Number';
+                numberArray.go = false;
+            }
         }
     }
+    
+    
+}
+function mouseClicked() {
+    if (HCFstate === 'Choose Mode' || HCFstate === 'solve'){
+        solver.clicked = true;
+
     }
-    
-    
+    for (let numberChooser of numberArray.numbers) {
+        for (let buttons of numberChooser.buttons) {
+            for (let button of buttons) {
+                button.clicked = true;
+            }
+        }
+    }
 }
