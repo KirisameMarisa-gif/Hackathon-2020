@@ -6,6 +6,8 @@ class Event {
         this.label = label;
         this.work = [];
     };
-    
+    addWork(workName, priority) {
+        
+    }
 
 }
