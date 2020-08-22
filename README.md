@@ -1,2 +1,2 @@
 # ZuluScience.github.io
-Friction Simulation
+Simulation for Teachers!!

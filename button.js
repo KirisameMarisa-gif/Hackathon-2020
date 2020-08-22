@@ -31,3 +31,21 @@ class Button {
         text(this.buttonText, this.centralPos.x, this.centralPos.y + 1);
     };
 }
+
+class NumberButton extends Button {
+    constructor(centrePos, buttonWidth, buttonHeight, buttonText, buttonTextSize) {
+      super(centrePos, buttonWidth, buttonHeight, buttonText, buttonTextSize);
+      this.clicked = false;
+    };
+    amPressed() {
+      if (this.clicked === true && mouseX < this.leftSideX + this.totalWidth && mouseX > this.leftSideX && mouseY < this.topSideY + this.totalHeight && mouseY > this.topSideY) {
+        print('yes');
+        this.clicked = false;
+        return true;
+      } else {
+        this.clicked = false;
+        return false;
+      }
+  
+    }
+  }

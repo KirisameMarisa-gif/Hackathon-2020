@@ -9,8 +9,8 @@ let frictionControl = [];
 let widthControl = [];
 let heightControl = [];
 let speedControl = [];
-let restartButton;
-let runButton;
+let HCFRestartButton;
+let HCFRunButton;
 let pic;
 let plant;
 let lamp;
@@ -30,15 +30,14 @@ let wavelength;
 let intensity = 0;
 let concentration = 0;
 let colour;
-let restartButton;
-let runButton;
+let photRestartButton;
+let photRunButton;
 let bubbles = [];
 let totalOxygen;
 let solver;
 let state;
 let HCFButton;
 let numberArray;
-let state;
 let HCFSimButton;
 let photSimButton;
 let fricSimButton;
@@ -192,8 +191,8 @@ function setup() {
     HCFButton = new Button(createVector(width / 2 - 50, height / 2), 60, 30, 'HCF', 10);
     LCMButton = new Button(createVector(width / 2 + 50, height / 2), 60, 30, 'LCM', 10);
     numberArray = new NumberArray();
-    restartButton = new Button(createVector(40, 40), 60, 30, 'RESTART', 11);   
-    runButton = new Button(createVector(40, 80), 60, 30, 'GO', 11); 
+    HCFRestartButton = new Button(createVector(40, 40), 60, 30, 'RESTART', 11);    
+    HCFRunButton = new Button(createVector(40, 80), 60, 30, 'GO', 11); 
     for (let i = 0; i < 7; i++) {
         distanceButtons[i] = new Button(createVector(25 + 38 * i, 520), 15, 15, '', 1);
     }
@@ -224,8 +223,8 @@ function setup() {
     totalOxygen = createVector(0, 0);
     roughness = 0.5;
     size = createVector(20, 20);
-    restartButton = new Button(createVector(40, 40), 60, 30, 'RESTART', 11);   
-    runButton = new Button(createVector(40, 80), 60, 30, 'GO', 11);   
+    photRestartButton = new Button(createVector(40, 40), 60, 30, 'RESTART', 11);   
+    photRunButton = new Button(createVector(40, 80), 60, 30, 'GO', 11);   
     box = new Box(createVector(20, 20), 2);
     for (let i = 0; i < 10; i ++) {
         let pos = createVector(400 + 20 * i, 100);
@@ -247,6 +246,7 @@ function setup() {
 }
 function draw() {
     if (fricstate === 'start') {
+        background(0);
         fricSimButton.show();
         if (fricSimButton.amPressed()) {
             fricstate = 'Friction';
@@ -263,12 +263,12 @@ function draw() {
         image(pic, 0, 0, 600, 600);   
         drawGround();
     
-        restartButton.show();
-        runButton.show();
-        if (runButton.amPressed()) {
+        HCFRestartButton.show();
+        HCFRunButton.show();
+        if (HCFRunButton.amPressed()) {
             fricstate = 'go';
         }
-        if (restartButton.amPressed()) {
+        if (HCFRestartButton.amPressed()) {
             fricstate = 'setBox';
             box.speed = 0;
             box.pos = createVector(100, 450);
@@ -324,14 +324,14 @@ function draw() {
         background(50, 150, 100);
   drawLamp(lampPos);
   drawSetup();
-  runButton.show();
-  restartButton.show()
-  if (runButton.amPressed() && photstate === 'set') {
+  photRunButton.show();
+  photRestartButton.show()
+  if (photRunButton.amPressed() && photstate === 'set') {
     photstate = 'go';
     timer = frameCount;
     totalOxygen = createVector(0, 0);
   }
-  if (restartButton.amPressed() || totalOxygen.x > 60) {
+  if (photRestartButton.amPressed() || totalOxygen.x > 60) {
     photstate = 'set';
     totalOxygen.x = 0;
   }
@@ -473,6 +473,7 @@ function draw() {
   drawLight(rOfLight, gOfLight, bOfLight, intensity, createVector(lampPos, 350), createVector(100, 150));
     } else if (state === 'HCF & LCM') {
         background(200);
+        resizeCanvas(700, 700);
     if (HCFstate === 'Choose Number') {
         numberArray.run();
         if (numberArray.go) {
