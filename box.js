@@ -17,14 +17,14 @@ class Box {
         strokeWeight(1);
         let yToDraw = this.pos.y - this.size.y;
         let xToDraw = this.pos.x;
-        if (this.pos.x > width - this.size.x) {
-            xToDraw = width - this.size.x;
+        if (this.pos.x > 600 - this.size.x) {
+            xToDraw = 600 - this.size.x;
         }    
         fill(0, 0, 255);
         rect(xToDraw, yToDraw, this.size.x, this.size.y);
         textSize(20);
         fill(100);
-        text(this.distanceTravelled, constrain(xToDraw + this.size.x / 2, 0, width - 20), yToDraw - 10);
+        text(this.distanceTravelled, constrain(xToDraw + this.size.x / 2, 0, 600 - 20), yToDraw - 10);
     };
     move() {
         this.speed -= this.friction;

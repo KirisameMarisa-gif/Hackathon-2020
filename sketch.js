@@ -187,7 +187,7 @@ function drawGround() {
     rect(0, 450, width, 150);
 }
 function setup() {
-    frameRate(30);
+    
     createCanvas(700, 700);
     state = 'start';
     HCFSimButton = new CircleButton(createVector(width / 2, height / 2 - 80), 50, 'HCF & LCM', 13);
@@ -270,9 +270,10 @@ function draw() {
         photSimButton.show();
         if (photSimButton.amPressed()) {
             state = 'Photosynthesis';
+            frameRate(30);
         }
         
-    } else if (fricstate === 'Friction') {
+    } else if (state === 'Friction') {
         image(pic, 0, 0, 600, 600);   
         drawGround();
         
