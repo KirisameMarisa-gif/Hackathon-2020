@@ -253,7 +253,7 @@ function setup() {
 }
 function draw() {
     if (state === 'start') {
-        background(0);
+        background(200);
         fricSimButton.show();
         if (fricSimButton.amPressed()) {
             state = 'Friction';
@@ -281,7 +281,7 @@ function draw() {
             box.speed = 0;
             box.pos = createVector(100, 450);
         }
-        textAlign(CENTER, CENTER);
+        textAlign(CENTER, CENTER, CENTER, CENTER);
         textSize(18);
         fill(50);
         text('Control the Roughness', 490, 75);
@@ -345,7 +345,7 @@ function draw() {
     photstate = 'set';
     totalOxygen.x = 0;
   }
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(255);
   noStroke();
@@ -354,29 +354,29 @@ function draw() {
   fill(0);
   noStroke();
 
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
   text('Control the Lamp\'s Brightness', 462.5, 175);
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
   text(intensity + ' units', 310, 190);
   text((475 - lampPos) / 10 + ' cm', lampPos, 325);
 
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
   text('Control the CO2 concentration', 462.5, 100);
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
 
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
   text('Control the Lamp\'s Light Colour', 462.5, 25);
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   textSize(17);
   fill(0);
   text(colour, 315, 40);
@@ -468,15 +468,15 @@ function draw() {
   } else {
     textSize(20);
     fill(0);
-    textAlign(CENTER);
+    textAlign(CENTER, CENTER);
     text('Rate of Photosynthesis:', 120, 200);
     textSize(20);
     fill(0);
-    textAlign(CENTER);
+    textAlign(CENTER, CENTER);
     text(floor(calculateRateOfPhot(intensity, concentration, wavelength, (475 - lampPos) / 10)) + ' Bubbles Per Minute', 120, 230);
     textSize(15);
     fill(0);
-    textAlign(CENTER);
+    textAlign(CENTER, CENTER);
     text('This will reset after 60 bubbles', 120, 260)
     drawOxygen(drawBubble(bubbles, calculateRateOfPhot(intensity, concentration, wavelength, (475 - lampPos) / 10), timer, 480, totalOxygen));
   }
@@ -491,7 +491,7 @@ function draw() {
             }
         } else if (HCFstate === 'Choose Mode') {
             textSize(30);
-            textAlign(CENTER);
+            textAlign(CENTER, CENTER);
             text('HCF or LCM?', width / 2, height / 5);
             HCFButton.show();
             LCMButton.show();
