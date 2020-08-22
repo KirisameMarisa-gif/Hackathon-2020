@@ -72,7 +72,8 @@ class CircleButton {
         noStroke();
         ellipse(this.centralPos.x, this.centralPos.y, this.radius * 2, this.radius * 2);
         textSize(this.buttonTextSize);
-        textAlign(CENTER);
+        fill(255);
+        textAlign(CENTER, CENTER);
         text(this.buttonText, this.centralPos.x, this.centralPos.y + 1);
     };
 }
