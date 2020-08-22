@@ -14,8 +14,12 @@ class Event {
     show() {
         let x = map(event.start, 0, 600, 0, width);
         let y = event.day * height / 7;
-        rect(x, y, map(event.duration, 0, 600, 0, width), height / 7);
-    }
+        let eventWidth = map(event.duration, 0, 600, 0, width);
+        rect(x, y, eventWidth, height / 7);
+        textAlign(CENTER);
+        text(this.label, x + eventWidth / 2, y + height / 14);
+
+    };
 
 
 }
