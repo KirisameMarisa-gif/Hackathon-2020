@@ -1,3 +1,5 @@
+const { FILL } = require("./p5");
+
 class Timetable{
     constructor(){
         this.events = [];
@@ -8,5 +10,10 @@ class Timetable{
     };
     addHomework(whichEvent, priority, name) {
         this.events[whichEvent].addWork(name, priority);
+    };
+    show() {
+        for (event in this.events) {
+            event.show();
+        } 
     }
 }
