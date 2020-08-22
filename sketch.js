@@ -189,9 +189,9 @@ function setup() {
     frameRate(30);
     createCanvas(700, 700);
     state = 'start';
-    HCFSimButton = new Button(createVector(width / 2, height / 2 - 50), 60, 30, 'HCF & LCM', 10);
-    photSimButton = new Button(createVector(width / 2, height / 2), 60, 30, 'Photosynthesis', 10);
-    fricSimButton = new Button(createVector(width / 2, height / 2 + 50), 60, 30, 'Friction', 10);
+    HCFSimButton = new CircleButton(createVector(width / 2, height / 2 - 80), 50, 'HCF & LCM', 10);
+    photSimButton = new CircleButton(createVector(width / 2 - 40, height / 2 + 40), 50, 'Photosynthesis', 10);
+    fricSimButton = new CircleButton(createVector(width / 2 + 40, height / 2 + 40), 50, 'Friction', 10);
 
     //sims setup
     HCFstate = 'Choose Number';

@@ -49,3 +49,30 @@ class NumberButton extends Button {
   
     }
   }
+class CircleButton {
+    constructor(centrePos, radius, buttonText, buttonTextSize) {
+        this.centralPos = centrePos;
+        this.radius = radius;
+        this.buttonText = buttonText;
+        this.colour = 100;
+        this.buttonTextSize = buttonTextSize;
+    };
+
+    amPressed() {
+        if (mouseIsPressed === true && dist(mouseX, mouseY, this.centralPos.x, this.centralPos.y) < this.radius) {
+            this.colour = 150;
+            return true;
+        } else {
+            this.colour = 100;
+            return false;
+        }
+    };
+    show() {
+        fill(this.colour);
+        noStroke();
+        ellipse(this.centralPos.x, this.centralPos.y, this.radius * 2, this.radius * 2);
+        textSize(this.buttonTextSize);
+        textAlign(CENTER);
+        text(this.buttonText, this.centralPos.x, this.centralPos.y + 1);
+    };
+}
