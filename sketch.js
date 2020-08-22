@@ -5,5 +5,6 @@ function setup() {
     timeTable.addEvent(300, 400, 3, 'CS');
 }
 function draw(){
+    background(20, 20, 20);
     timeTable.show();
 }

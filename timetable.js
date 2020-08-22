@@ -1,4 +1,3 @@
-const { FILL } = require("./p5");
 
 class Timetable{
     constructor(){
@@ -12,7 +11,7 @@ class Timetable{
         this.events[whichEvent].addWork(name, priority);
     };
     show() {
-        for (event in this.events) {
+        for (let event of this.events) {
             event.show();
         } 
     }
