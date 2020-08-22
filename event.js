@@ -12,11 +12,11 @@ class Event {
         this.work.push(work);
     };
     show() {
-        let x = map(event.start, 0, 600, 0, width);
-        let y = event.day * height / 7;
-        let eventWidth = map(event.duration, 0, 600, 0, width);
+        let x = map(this.start, 0, 600, 0, width);
+        let y = this.day * height / 7;
+        let eventWidth = map(this.duration, 0, 600, 0, width);
         rect(x, y, eventWidth, height / 7);
-        textAlign(CENTER);
+        textAlign(CENTER, CENTER);
         text(this.label, x + eventWidth / 2, y + height / 14);
 
     };
