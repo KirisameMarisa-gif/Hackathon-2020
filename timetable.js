@@ -6,7 +6,7 @@ class Timetable{
         let event = new Event(start, end, day, label);
         this.events.push(event);
     };
-    addHomework() {
-        
+    addHomework(whichEvent, priority, name) {
+        this.events[whichEvent].addWork(name, priority);
     }
 }

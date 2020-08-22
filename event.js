@@ -7,7 +7,9 @@ class Event {
         this.work = [];
     };
     addWork(workName, priority) {
-        
-    }
+        let work = new Work(workName, prioority);
+        this.work.push(work);
+    };
+    
 
 }
